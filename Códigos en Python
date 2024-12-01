@@ -1,0 +1,28 @@
+# Código para la limpieza de datos
+def clean_data(data):
+    
+    # Eliminar columnas irrelevantes
+    data = data.drop(columns=['Unnamed: 0'], errors='ignore')
+
+    # Identificar valores nulos
+    print("Valores nulos por columna:")
+    print(data.isnull().sum())
+    
+    # Rellenar o eliminar valores nulos (si existen)
+    data = data.dropna()  # O usa data.fillna(valor) según sea necesario
+
+    # Verificar rangos de valores para las calificaciones
+    for col in ['Calificación General', 'Limpieza', 'Servicio', 
+                'Relación costo-beneficio', 'Comodidad', 'Alimentos y Bebidas']:
+        if col in data.columns:
+            if not data[col].between(3.0, 5.0).all():
+                print(f"Valores fuera de rango en {col}, ajustando...")
+                data[col] = np.clip(data[col], 3.0, 5.0)
+
+    # Eliminar duplicados
+    data = data.drop_duplicates()
+
+    print("Datos después de limpieza:")
+    print(data.head())
+    return data
+

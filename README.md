@@ -1,8 +1,3 @@
-
-
-
-
-
 Análisis de hoteles en el Estado de Veracruz
 
 Facultad de Estadística e Informática, Universidad Veracruzana
